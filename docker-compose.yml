@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: local/hello:latest
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./.env:/srv/.env
+    networks:
+      - nodejs-app-network
+
+networks:
+  nodejs-app-network:
+    external: true
